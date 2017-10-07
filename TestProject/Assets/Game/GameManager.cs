@@ -6,6 +6,13 @@ using UnityStandardAssets.CrossPlatformInput;
 public class GameManager : MonoBehaviour {
 
 	public bool recording = true;
+
+	void Start ()
+	{
+		PlayerPrefsManager.UnlockLevel(2);
+		Debug.Log(PlayerPrefsManager.IsLevelUnlocked(1));
+		Debug.Log(PlayerPrefsManager.IsLevelUnlocked(2));
+	}
 	
 	// Update is called once per frame
 	void Update ()
