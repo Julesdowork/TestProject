@@ -5,22 +5,27 @@ using UnityEngine;
 public class MyReplay : MonoBehaviour {
 
 	private const int BUFFER_FRAMES = 100;
+	private GameManager gameManager;
 	private MyKeyFrame[] keyFrames = new MyKeyFrame[BUFFER_FRAMES];
 	private Rigidbody myRigidbody;
 
 	// Use this for initialization
 	void Start ()
 	{
+		gameManager = FindObjectOfType<GameManager>();
 		myRigidbody = GetComponent<Rigidbody>();
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
-		Record();
+		if (gameManager.recording)
+			Record();
+		else
+			Playback();
 	}
 
-	void Playback ()
+	public void Playback ()
 	{
 		myRigidbody.isKinematic = true;
 		int frame = Time.frameCount % BUFFER_FRAMES;
